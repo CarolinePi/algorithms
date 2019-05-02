@@ -4,10 +4,9 @@ class Node:
         self.next = None
 
 
-class Queue:
+class Stack:
     def __init__(self):
         self.__begin = None
-        self.__end = None
         self.__length = 0
 
     def __str__(self):
@@ -25,10 +24,11 @@ class Queue:
 
     def push(self, data):
         if self.__begin is None:
-            self.__begin = self.__end = Node(data)
+            self.__begin = Node(data)
         else:
-            self.__end.next = Node(data)
-            self.__end = self.__end.next
+            new = Node(data)
+            new.next = self.__begin
+            self.__begin = new
 
     def pop(self):
         temp = self.__begin.data
