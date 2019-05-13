@@ -8,21 +8,16 @@ import sorting
 
 
 class TestHashTable(unittest.TestCase):
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
 
     def testsort(self):
         bsort = sorting.BubbleSort()
         qsort = sorting.QuickSort()
         isort = sorting.InsertionSort()
         ssort = sorting.SelectionSort()
-        bsort.array = [5, 9, 3, 7, 2, 7, 2, 1, 5]
-        qsort.array = [5, 9, 3, 7, 2, 7, 2, 1, 5]
-        isort.array = [5, 9, 3, 7, 2, 7, 2, 1, 5]
-        ssort.array = [5, 9, 3, 7, 2, 7, 2, 1, 5]
+        bsort.array = qsort.array = isort.array = ssort.array = [5, 9, 3, 7, 2, 7, 2, 1, 5]
+        bsort.sorting()
+        isort.sorting()
+        ssort.sorting()
         self.assertEqual(bsort.array, [1, 2, 2, 3, 5, 5, 7, 7, 9])
         self.assertEqual(qsort.array, [1, 2, 2, 3, 5, 5, 7, 7, 9])
         self.assertEqual(isort.array, [1, 2, 2, 3, 5, 5, 7, 7, 9])
@@ -36,10 +31,10 @@ class TestHashTable(unittest.TestCase):
         qsort = sorting.QuickSort()
         isort = sorting.InsertionSort()
         ssort = sorting.SelectionSort()
-        bsort.array = array
-        qsort.array = array
-        isort.array = array
-        ssort.array = array
+        bsort.array = qsort.array = isort.array = ssort.array = array
+        bsort.sorting()
+        isort.sorting()
+        ssort.sorting()
         self.assertEqual(bsort.array, sorted(array))
         self.assertEqual(qsort.array, sorted(array))
         self.assertEqual(isort.array, sorted(array))

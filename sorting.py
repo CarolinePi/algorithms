@@ -1,16 +1,26 @@
 import time
-import random
+from functools import wraps
 
 
-class Interface:
+class Interface(object):
     def sorting(self): raise NotImplementedError
+
+    @staticmethod
+    def timer(func):
+        """Decorator for function which count time. """
+        @wraps(func)
+        def inner(self, *args, **kwargs):
+            start_time = time.time()
+            func(self)
+            print("Time: %s" % (time.time() - start_time))
+        return inner
 
 
 class BubbleSort(Interface):
     def __init__(self):
         self.__array = []
-        self.start_time = 0
 
+    @Interface.timer
     def sorting(self):
         for i in range(len(self.__array) - 1):
             for j in range(i, len(self.__array)):
@@ -25,17 +35,14 @@ class BubbleSort(Interface):
     @array.setter
     def array(self, value):
         self.__array = value
-        self.start_time = time.time()
-        self.__array = self.sorting()
-        print("Time: %s" % (time.time() - self.start_time))
 
 
 class SelectionSort(Interface):
     def __init__(self):
         self.__array = []
-        self.start_time = 0
 
     def minimum(self, i):
+        """ Find minimum in array. """
         temp = self.__array[i]
         temp_index = i
         for iterator in range(i + 1, len(self.__array)):
@@ -44,6 +51,7 @@ class SelectionSort(Interface):
                 temp_index = iterator
         return temp_index
 
+    @Interface.timer
     def sorting(self):
         for i in range(len(self.__array)):
             minim_index = self.minimum(i)
@@ -57,16 +65,13 @@ class SelectionSort(Interface):
     @array.setter
     def array(self, value):
         self.__array = value
-        self.start_time = time.time()
-        self.__array = self.sorting()
-        print("Time: %s" % (time.time() - self.start_time))
 
 
 class InsertionSort(Interface):
     def __init__(self):
         self.__array = []
-        self.start_time = 0
 
+    @Interface.timer
     def sorting(self):
         if len(self.__array) <= 1:
             return self.__array
@@ -86,9 +91,6 @@ class InsertionSort(Interface):
     @array.setter
     def array(self, value):
         self.__array = value
-        self.start_time = time.time()
-        self.__array = self.sorting()
-        print("Time: %s" % (time.time() - self.start_time))
 
 
 class QuickSort(Interface):
